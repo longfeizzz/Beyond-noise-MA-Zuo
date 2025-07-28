@@ -5,7 +5,7 @@ from transformers import pipeline
 
 os.environ['CUDA_VISIBLE_DEVICES'] = '1,2'
 os.environ["TRANSFORMERS_OFFLINE"] = "1"
-os.environ["HF_HUB_CACHE"] = "/mounts/data/proj/zlongfei/.cache"
+os.environ["HF_HUB_CACHE"] = "../zlongfei/.cache"
 
 # model_id = "meta-llama/Llama-3.1-8B-Instruct"
 model_id = "meta-llama/Llama-3.3-70B-Instruct"
@@ -18,16 +18,6 @@ pipe = pipeline(
     device_map="auto"
 )
 
-# def build_prompt_text(premise, hypothesis, relationship):
-#     return (
-#         f"You are an expert in Natural Language Inference (NLI). "
-#         f"Please list all possible distinct explanations for why the following statement is {relationship} given the context below without introductory phrases. "
-#         f"Do not repeat or paraphrase the same idea in different words. End your answer after all reasonable distinct explanations are listed.\n"
-#         f"Format your answer as a numbered list (e.g., 1., 2., 3.).\n\n"
-#         f"Context: {premise}\n"
-#         f"Statement: {hypothesis}\n"
-#         f"Answer:"
-#     )
 def build_chat_messages(premise, hypothesis, relationship):
     sys_msg = {
         "role": "system",
@@ -74,6 +64,6 @@ def process_jsonl(jsonl_path, output_dir):
                 with open(os.path.join(sample_folder, filename), "w", encoding="utf-8") as out_file:
                     out_file.write(response)
 
-jsonl_path = "/mounts/data/proj/zlongfei/ZLF/varierr.json"
-output_dir = "/mounts/data/proj/zlongfei/ZLF/llama3.3_70b_generation"
+jsonl_path = "../varierr.json"
+output_dir = "../llama3.3_70b_generation"
 process_jsonl(jsonl_path, output_dir)

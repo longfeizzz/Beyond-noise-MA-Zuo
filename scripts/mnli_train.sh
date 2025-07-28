@@ -1,6 +1,6 @@
 export TASK_NAME=mnli
 
-python /root/MJD-fine-tuning/scripts/run.py \
+python ../run.py \
   --model_name_or_path bert-base-uncased \
   --task_name $TASK_NAME \
   --do_train \

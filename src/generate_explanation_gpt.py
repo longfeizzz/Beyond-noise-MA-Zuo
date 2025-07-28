@@ -38,17 +38,6 @@ def generate_reason_list(s, premise, hypothesis, label):
     s += assistant(gen("response", max_tokens=256))
 
 
-# def generate_response(messages):
-#     # outputs = pipe(prompt_str, max_new_tokens=256)
-#     # response = outputs[0]["generated_text"]
-#     # print("response:", response)
-#     # return response.strip()
-#     out = pipe(messages, max_new_tokens=256)
-#     # print("out is:", out)
-#     assistant_answer = out[0]["generated_text"][-1]["content"]
-#     # print("assistant_answer is:", assistant_answer)
-#     return assistant_answer.strip()
-
 
 
 def process_jsonl(jsonl_path, output_dir):
@@ -69,6 +58,6 @@ def process_jsonl(jsonl_path, output_dir):
                 with open(sample_folder / filename, "w", encoding="utf-8") as f_out:
                     f_out.write(result)
 
-jsonl_path = "/Users/phoebeeeee/ongoing/Beyond-noise/dataset/varierr.json"
-output_dir = "/Users/phoebeeeee/ongoing/Beyond-noise/2_llm_validation/500/LLM_exp+LLM_dist+LLM_validate/gpt-4.1/gpt_4.1_generation_raw"
+jsonl_path = "../varierr.json"
+output_dir = "../gpt-4.1/gpt_4.1_generation_raw"
 process_jsonl(jsonl_path, output_dir)

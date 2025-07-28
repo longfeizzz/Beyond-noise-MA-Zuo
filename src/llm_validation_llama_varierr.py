@@ -51,7 +51,7 @@ def build_messages(context, statement, label, reason_text):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--model_name_or_path", type=str, default="meta-llama/Llama-3.2-3B-Instruct")
-    parser.add_argument("--input_path", type=str, required=True)  # 新 jsonl 格式
+    parser.add_argument("--input_path", type=str, required=True)
     parser.add_argument("--output_dir", type=str, default="predictions/llama3.2-3b")
     args = parser.parse_args()
 
@@ -61,7 +61,6 @@ def main():
 
     predictions = {}
 
-    # 逐行读取 jsonl
     with open(args.input_path, "r") as f:
         for line in tqdm(f):
             instance = json.loads(line)
@@ -72,7 +71,7 @@ def main():
             for label in ["entailment", "neutral", "contradiction"]:
                 if label not in instance or not isinstance(instance[label], list):
                     continue
-                label_code = label[0]  # "entailment" -> "e"
+                label_code = label[0]  
                 for idx, reason_entry in enumerate(instance[label]):
                     reason_id = f"{instance_id}-{label_code}-{idx}"
                     reason_text = reason_entry["reason"]
@@ -91,7 +90,7 @@ def main():
                         print("-" * 80)
                         predictions[reason_id] = probability
                     except Exception as e:
-                        print(f"[ERROR] Failed to process {reason_id}: {e}")
+                        print(f"Failed to process {reason_id}: {e}")
                         predictions[reason_id] = None
 
 

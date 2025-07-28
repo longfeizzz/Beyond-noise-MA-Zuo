@@ -54,7 +54,7 @@ def build_messages(premise, hypothesis, label, reason_text):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--model_name_or_path", type=str, default="meta-llama/Llama-3.2-3B-Instruct")
-    parser.add_argument("--input_path", type=str, default="/mounts/data/proj/zlongfei/ZLF/llama_explanation_raw.jsonl")
+    parser.add_argument("--input_path", type=str, default="../ZLF/llama_explanation_raw.jsonl")
     parser.add_argument("--output_dir", type=str, default="predictions/llama3.2-3b")
     args = parser.parse_args()
 

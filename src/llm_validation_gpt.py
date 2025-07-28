@@ -8,7 +8,7 @@ import datasets
 
 PROMPT_TEMPLATE = f"We have collected annotations for an NLI instance together with reasons for the labels. Your task is to judge whether the reasons make sense for the label. Provide the probability (0.0 - 1.0) that the reason makes sense for the label. Give ONLY the probability, no other words or explanation. For example:\n\nProbability: <the probability between 0.0 and 1.0 that the reason makes sense for the label, without any extra commentary whatsoever; just the probability!>."
 
-dataset = datasets.Dataset.from_json("/Users/phoebeeeee/ongoing/Beyond-noise/2_llm_validation/500/LLM_exp+LLM_dist+LLM_validate/gpt-4.1/gpt_explanation_raw.jsonl")
+dataset = datasets.Dataset.from_json("../gpt-4.1/gpt_explanation_raw.jsonl")
 
 label_map = {"e": "entailment", "n": "neutral", "c": "contradiction"}
 
@@ -25,7 +25,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument("model_name", type=str)
 args = parser.parse_args()
 
-output_dir = Path(f"/Users/phoebeeeee/ongoing/Beyond-noise/2_llm_validation/500/LLM_exp+LLM_dist+LLM_validate/gpt-4.1/test/{args.model_name}")
+output_dir = Path(f"../gpt-4.1/test/{args.model_name}")
 output_dir.mkdir(exist_ok=True, parents=True)
 set_default_backend(OpenAI(model_name=args.model_name))
 
@@ -38,7 +38,7 @@ for instance in tqdm(dataset, total=len(dataset), desc="Scoring instances", dyna
 
     for idx, (reason_text, label_code) in enumerate(instance["generated_explanations"]):
         if label_code not in label_map:
-            print(f"Label code {label_code} not in label map. Skipping.")
+            print(f" {label_code} not in label map.")
             continue
         label = label_map[label_code]
         reason_id = f"{instance_id}_{label_code}-{idx}"
@@ -64,6 +64,5 @@ for instance in tqdm(dataset, total=len(dataset), desc="Scoring instances", dyna
         with open(cache_file, "w") as f:
             json.dump(cacheable, f, indent=2)
 
-# 保存总输出
 with open(output_dir / "scores.json", "w") as f:
     json.dump(predictions, f, indent=2)

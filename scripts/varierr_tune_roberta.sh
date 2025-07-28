@@ -3,19 +3,19 @@
 CUDA_VISIBLE_DEVICES=0
 BNB_CUDA_VERSION=122
 
-directory="/root/MJD-fine-tuning/dataset/train_chaosnli_dist"
+directory="../train_chaosnli_dist"
 
 find "$directory" -type f | while read file; do
     folder_path=$(dirname "$file")
     echo "Processing file: $file"
     TRAIN_FILE=$file
-    VALIDATION_FILE=/root/MJD-fine-tuning/dataset/dev_cleaned.json
-    TEST_FILE=/root/MJD-fine-tuning/dataset/test_cleaned.json
-    OUTPUT=/root/output/roberta_repeated_errorless
+    VALIDATION_FILE= ../dataset/dev_cleaned.json
+    TEST_FILE= ../dataset/test_cleaned.json
+    OUTPUT= ../output/roberta_repeated_errorless
     mkdir -p "$OUTPUT"
 
-    python run.py \
-      --model_name_or_path /root/MJD-fine-tuning/roberta_finetuned \
+    python ../run.py \
+      --model_name_or_path ../roberta_finetuned \
       --train_file "$TRAIN_FILE" \
       --validation_file "$VALIDATION_FILE" \
       --test_file "$TEST_FILE" \
