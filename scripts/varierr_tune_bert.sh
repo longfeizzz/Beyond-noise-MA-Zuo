@@ -14,7 +14,7 @@ find "$directory" -type f | while read file; do
     OUTPUT= ../output/bert_repeated_errorless
     mkdir -p "$OUTPUT"
 
-    python ../run.py \
+    python run.py \
       --model_name_or_path ../bert_finetuned \
       --train_file "$TRAIN_FILE" \
       --validation_file "$VALIDATION_FILE" \

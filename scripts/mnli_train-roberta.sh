@@ -1,6 +1,6 @@
 export TASK_NAME=mnli
 
-python ../run.py \
+python run.py \
   --model_name_or_path roberta-base \
   --task_name $TASK_NAME \
   --do_train \
