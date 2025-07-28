@@ -84,7 +84,7 @@ python src/llm_validation_llama.py
 - `notebooks/distribution_comparison.ipynb`: KLD and JSD between model and human distributions from VariErr or ChaosNLI.
 
 ### Ranking Alignment
-- `notebooks/generate ranking.ipynb`: Ranking based comparison between model and human distributions from VariErr or ChaosNLI.
+- `notebooks/generate_ranking.ipynb`: Ranking based comparison between model and human distributions from VariErr or ChaosNLI.
 
 
 ### Evaluation Protocol from [VariErr](https://aclanthology.org/2024.acl-long.123.pdf).
@@ -99,7 +99,16 @@ python src/evaluation_protocol_varierr.py
 
 
 ## Downstream Fine-Tuning
-####  Evaluate error removal impact on NLI task performance.
+####  Evaluate error removal impact on downstream NLI task performance.
+
+Use these notebooks to generate different training sets — with or without injected noise or filtered errors:
+- `notebooks/injecting_noise_self_validated.ipynb` 
+- `notebooks/injecting_noise_peer_validated.ipynb`
+- `notebooks/chaosnli_dist.ipynb`
+- `notebooks/removing_llm-errors.ipynb` 
+
+
+Run the following scripts to fine-tune and evaluate:
 
 ```bash
 bash scripts/varierr_tune_bert.sh
